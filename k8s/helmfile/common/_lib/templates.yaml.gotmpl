@@ -1,0 +1,34 @@
+# This template aimed to standardize values.yaml layers
+# and overrides across all environments
+
+templates:
+  dbcc: &dbcc
+    chart: stable/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}
+    namespace: default
+    missingFileHandler: Warn
+    values:
+      - ../../../helm/configs/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}.yaml		# Old static file in helm, should be removed
+      - config/values.yaml.gotmpl					# Going to be our internal common configuration
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/values.yaml					# Going to be per-tenant global override static
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/values.yaml.gotmpl				# Going to be per-tenant global override template
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}/values.yaml		# Going to be per-tenant environment override static
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}/values.yaml.gotmpl	# Going to be per-tenant environment override template
+#    secrets:
+#    - config/{{`{{ trimSuffix .Environment.Name .Release.Name }}`}}/secrets.yaml
+#    - config/{{`{{ trimSuffix .Environment.Name .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}-secrets.yaml
+
+  custom: &custom
+    chart: stable/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}
+    namespace: default
+    missingFileHandler: Warn
+    values:
+      - ../../../helm/configs/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}.yaml		# Old static file in helm, should be removed
+      - config/values.yaml													# Going to be our project specific configuration for all envs of custom charts
+      - config/values.yaml.gotmpl												# Going to be our project specific configuration for all envs of custom charts
+      - config/{{ .Environment.Name }}.yaml											# Per-environment project specific configuration (static)
+      - config/{{ .Environment.Name }}.yaml.gotmpl										# Per-environment project specific configuration (template)
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}/values.yaml.gotmpl
+      - ../../config/{{ trimPrefix (print .Environment.Name "-") .Release.Name }}/{{ .Environment.Name }}/values.yaml
+#    secrets:
+#    - config/{{`{{ trimSuffix .Environment.Name .Release.Name }}`}}/secrets.yaml
+#    - config/{{`{{ trimSuffix .Environment.Name .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}-secrets.yaml

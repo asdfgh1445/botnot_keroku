@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+    botnot:
+        build:
+            context: ./
+        ports:
+            - 127.0.0.1:8081:8081
+        env_file:
+            - .env
+        restart:  always

@@ -1,0 +1,50 @@
+pipelines:
+  default:
+     - step:
+         name: Deploy to dev-server
+         deployment: production
+         script:
+           - echo "Deploying to dev environment"
+           - pipe: atlassian/ssh-run:0.3.1
+             variables:
+               SSH_USER: 'dev'
+               SERVER: '52.88.199.215'
+               COMMAND: 'cd botnot; git pull origin master; docker-compose build --build-arg BOTNOT_API_URL="https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/" --build-arg SHOPIFY_API_KEY="39556ab0f11855181db058ee3cb218f5"; docker-compose up -d'
+     - step:
+         name: build image
+         image: "docker:stable"
+         script:
+           - docker build -t  botnot  -f Dockerfile --build-arg BOTNOT_API_URL="https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/" --build-arg SHOPIFY_API_KEY="dda4893b139fb910ee4d89026715dda9"  .
+           - docker save --output tmp-image.docker  botnot
+         artifacts:
+           - tmp-image.docker
+         services:
+           - docker
+     - step:
+         name: Push to AWS registry
+         image: "akeks305/aws-ci-docker:latest"
+         script:
+           - docker load --input ./tmp-image.docker
+           - export TAG=$(date +%d%m%y_%H%M) && echo $TAG > tag
+           - export IMAGE_NAME=236089630002.dkr.ecr.us-west-2.amazonaws.com/botnot:$TAG
+           - echo ${IMAGE_NAME}
+           - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+           - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+           - export AWS_DEFAULT_REGION=us-west-2
+           - docker tag  botnot  ${IMAGE_NAME}
+           - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 236089630002.dkr.ecr.us-west-2.amazonaws.com
+           - docker push ${IMAGE_NAME}
+         services:
+           - docker
+         artifacts:
+           - tag
+     - step:
+         name: Deploy to k8s
+         image: dtzar/helm-kubectl:3.6.3
+         script:
+           - export TAG=$(cat tag)
+           - echo $TAG
+           - mkdir ~/.kube && echo $KUBE_CONFIG | base64 -d  > ~/.kube/config && cat  ~/.kube/config
+           - kubectl get nodes
+           - helm ls --all-namespaces
+           - helm upgrade --install --namespace prod --set image.tag=$TAG  botnot k8s/charts/botnot

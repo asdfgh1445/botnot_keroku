@@ -1,0 +1,6 @@
+helmDefaults:
+#  verify: true		# Causing issues for some releases, must be investigated.
+  wait: true
+  timeout: 900
+  kubeContext: {{ .Environment.Name }}.{{ .Values.project }}.local
+
