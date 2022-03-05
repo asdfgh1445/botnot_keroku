@@ -1,4 +1,0 @@
-installCRDs: true
-
-ingressShim: 
-  defaultIssuerName: letsencrypt
