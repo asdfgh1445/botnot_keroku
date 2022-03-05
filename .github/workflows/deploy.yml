@@ -24,5 +24,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "botnot_0124"
+          heroku_app_name: "botnot0124"
           heroku_email: "katterine0124@gmail.com"
