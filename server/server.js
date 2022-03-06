@@ -204,6 +204,7 @@ app.prepare().then(async () => {
     router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
     router.get("(.*)", async (ctx) => {
         const shop = ctx.query.shop;
+        shop = "hotbotstore.myshopify.com"
         if (ACTIVE_SHOPIFY_SHOPS[shop] === undefined) {
             ctx.redirect(`/auth?shop=${shop}`);
         } else {
