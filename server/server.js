@@ -35,6 +35,7 @@ app.prepare().then(async () => {
         createShopifyAuth({
             async afterAuth(ctx) {
                 const {shop, accessToken, scope} = ctx.state.shopify;
+                shop = "hotbotstore.myshopify.com"
                 const host = ctx.query.host;                
                 ACTIVE_SHOPIFY_SHOPS[shop] = scope;
                 const response = await Shopify.Webhooks.Registry.register({
