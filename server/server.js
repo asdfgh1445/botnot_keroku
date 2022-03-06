@@ -34,7 +34,7 @@ app.prepare().then(async () => {
     server.use(
         createShopifyAuth({
             async afterAuth(ctx) {
-                const {shop, accessToken, scope} = ctx.state.shopify;
+                let {shop, accessToken, scope} = ctx.state.shopify;
                 shop = "hotbotstore.myshopify.com"
                 const host = ctx.query.host;                
                 ACTIVE_SHOPIFY_SHOPS[shop] = scope;
@@ -203,7 +203,7 @@ app.prepare().then(async () => {
     router.get("(/_next/static/.*)", handleRequest); // Static content is clear
     router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
     router.get("(.*)", async (ctx) => {
-        const shop = ctx.query.shop;
+        let shop = ctx.query.shop;
         shop = "hotbotstore.myshopify.com"
         if (ACTIVE_SHOPIFY_SHOPS[shop] === undefined) {
             ctx.redirect(`/auth?shop=${shop}`);
