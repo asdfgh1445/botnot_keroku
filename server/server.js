@@ -16,9 +16,9 @@ const app = next({
 const handle = app.getRequestHandler();
 const JwtToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2NvbGxlY3RpYmxlcy1zbmVha2Vycy5teXNob3BpZnkuY29tL2FkbWluIiwiZGVzdCI6Imh0dHBzOi8vY29sbGVjdGlibGVzLXNuZWFrZXJzLm15c2hvcGlmeS5jb20iLCJhdWQiOiIzOTU1NmFiMGYxMTg1NTE4MWRiMDU4ZWUzY2IyMThmNSIsInN1YiI6Ijc3MTAyNzEwOTU1IiwiaWF0IjoxNjQwNzc5MjIwLCJqdGkiOiJjMTk3ZGYyZC02OTM3LTQxNjktYjUyMC1iZmUyNDczZTM3MTYiLCJzaWQiOiJhN2U2MGY4ZjU5OGU3MjU1YmE2YzJkOTFiYmQxOGE4YzZhNjIxNjcyOWNmNjJhYTFlNzFmMGE4ZmQ4NTUxZWZhIn0.U6JfSYk1KrVC0UdWUn7zycHtXBDItSt-qzxcU5QQbVo";
 Shopify.Context.initialize({
-    API_KEY: process.env.SHOPIFY_API_KEY,
-    API_SECRET_KEY: process.env.SHOPIFY_API_SECRET,
-    SCOPES: process.env.SCOPES.split(","),
+    API_KEY: "858b5e471ef9a7506863936f0a5c05b6",
+    API_SECRET_KEY: "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",
+    SCOPES: "read_products,read_customers,read_orders,read_order_edits,read_draft_orders,read_fulfillments,read_shipping,read_inventory",
     HOST_NAME: process.env.HOST.replace(/https:\/\//, ""),
     API_VERSION: ApiVersion.October20,
     IS_EMBEDDED_APP: true,
