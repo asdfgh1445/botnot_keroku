@@ -87,7 +87,7 @@ app.prepare().then(async () => {
     });
     router.get("/api/dashboard", async (ctx) => {
         const authHeader = ctx.get('Authorization'); 
-        const response = await fetch(`${process.env.BOTNOT_API_URL}dashboard/`, {
+        const response = await fetch(`https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/dashboard/`, {
             method: "POST",
             headers: {
                 'Authorization': JwtToken,
@@ -110,7 +110,7 @@ app.prepare().then(async () => {
     router.post("/api/transaction/:ids/approve", async (ctx) => {
         const authHeader = ctx.get('Authorization');
         const ids = ctx.params.ids.split(',').map(Number);
-        const response = await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
+        const response = await fetch(`https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`, {
             method: "POST",
             headers: {
                 'Authorization': JwtToken,
@@ -127,7 +127,7 @@ app.prepare().then(async () => {
     router.post("/api/transaction/:ids/mark_as_fraud", async (ctx) => {
         const authHeader = ctx.get('Authorization');
         const ids = ctx.params.ids.split(',').map(Number);
-        await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
+        await fetch(`https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`, {
             method: "POST",
             headers: {
                 'Authorization': JwtToken,
@@ -143,7 +143,7 @@ app.prepare().then(async () => {
     });
     router.get("/api/transactions", async (ctx) => {
         const authHeader = ctx.get('Authorization');        
-        const response = await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
+        const response = await fetch(`https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`, {
             method: "POST",
             headers: {
                 'Authorization': JwtToken,
