@@ -19,7 +19,7 @@ Shopify.Context.initialize({
     API_KEY: "858b5e471ef9a7506863936f0a5c05b6",
     API_SECRET_KEY: "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",
     SCOPES: "read_products,read_customers,read_orders,read_order_edits,read_draft_orders,read_fulfillments,read_shipping,read_inventory",
-    HOST_NAME: process.env.HOST.replace(/https:\/\//, ""),
+    HOST_NAME: "https://botnot0124.herokuapp.com",
     API_VERSION: ApiVersion.October20,
     IS_EMBEDDED_APP: true,
     SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
