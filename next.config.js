@@ -1,9 +1,13 @@
 const { parsed: localEnv } = require("dotenv").config();
 
 const webpack = require("webpack");
-const apiKey = JSON.stringify("858b5e471ef9a7506863936f0a5c05b6");
-const botnotApiUrl = JSON.stringify("https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/");
-const posthogKey = JSON.stringify("phc_7cmZZM8pe90nPjl2u2vPgXa6AqBjPyDhuZOZ8xcS0HX");
+const apiKey = JSON.stringify("593dd87eabb07768131329e7c4f11bc4");
+const botnotApiUrl = JSON.stringify(
+  "https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/"
+);
+const posthogKey = JSON.stringify(
+  "phc_7cmZZM8pe90nPjl2u2vPgXa6AqBjPyDhuZOZ8xcS0HX"
+);
 const posthogUrl = JSON.stringify("https://posthog.botnot.io");
 const beaconKey = JSON.stringify("9bf7d9df-08ea-46fd-b82f-83ed1b05a2fa");
 
