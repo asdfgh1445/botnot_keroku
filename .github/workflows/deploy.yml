@@ -23,7 +23,7 @@ jobs:
           echo 'POSTHOG_URL=https://posthog.botnot.io' >> .env
           echo 'BEACON_KEY=9bf7d9df-08ea-46fd-b82f-83ed1b05a2fa' >> .env
           ls -al
-          cat .env
+          ls node_modules
       - name: Use Node.js
         uses: actions/setup-node@v2
         with: 
