@@ -96,9 +96,7 @@ const Index = ({ authAxios, host }) => {
         console.log(error);
       });
   };
-  const ClickButton = (e) => {
-    posthog.capture('Anderi-san clicked the button', { $set: { color: 'Red' } })
-  }
+ 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (
@@ -121,7 +119,11 @@ const Index = ({ authAxios, host }) => {
   }, [ready, dateRange, page, pageSize]);
 
   if (!isLoaded) {
-    return <b>{message}</b>;
+    return (
+      <div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    );
   } else {
     return (
       <Page>
@@ -132,7 +134,6 @@ const Index = ({ authAxios, host }) => {
             />
           )
         }
-        <button onClick={()=>ClickButton()}>button Click</button>
         <div className="inner">
           <section className="title">
             <h1>Welcome!</h1>
