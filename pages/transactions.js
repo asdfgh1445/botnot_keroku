@@ -88,9 +88,7 @@ const Transactions = ({ authAxios }) => {
       day < 10 ? "0" : ""
     }${day}`;
   };
-  const ClickButton = (e) => {
-    posthog.capture('Anderi-san clicked the Blue button', { $set: { color: 'Blue' } })
-  }
+ 
   const loadTransactions = () => {
     authAxios
       .get(
@@ -145,7 +143,6 @@ const Transactions = ({ authAxios }) => {
     return (
       <Page>
         {" "}
-        <button onClick={()=>ClickButton()}>button Click</button>
         <div className="inner">
           <section className="title">
             <h1>Transactions</h1>
