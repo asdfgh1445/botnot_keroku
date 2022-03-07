@@ -21,7 +21,7 @@ const Index = ({ authAxios, host }) => {
   const [chartData, setChartData] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [totalsData, setTotalsData] = useState({});
-  const [warning, setWarning ] = useState(false);
+  const [warning, setWarning] = useState(false);
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -76,7 +76,7 @@ const Index = ({ authAxios, host }) => {
             result.data.totals.safe,
           ]);
           setTotal(result.data.totals.product_count);
-          setPage(page);          
+          setPage(page);
           setPageSize(pageSize);
           setTotalPages(
             Math.ceil(result.data.totals.product_count / pageSize / 1)
@@ -84,9 +84,11 @@ const Index = ({ authAxios, host }) => {
           setTableData(transformData(result.data.data));
           setTotalsData(result.data.totals);
           setServiceStatus(result.data.service_status);
-          setWarning(result.data.service_status.service_status.over_quota||result.data.service_status.service_status.suspended);
+          setWarning(
+            result.data.service_status.service_status.over_quota ||
+              result.data.service_status.service_status.suspended
+          );
           setIsLoaded(true);
-    
         } else {
           setMessage("Unexpected error occurred. Please try again later.");
         }
@@ -96,7 +98,7 @@ const Index = ({ authAxios, host }) => {
         console.log(error);
       });
   };
- 
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (
@@ -108,7 +110,7 @@ const Index = ({ authAxios, host }) => {
           end: new Date(localStorage.getItem("date_filter_to")),
         });
       }
-    }    ;
+    }
     setReady(true);
   }, []);
 
@@ -120,20 +122,21 @@ const Index = ({ authAxios, host }) => {
 
   if (!isLoaded) {
     return (
-      <div className="spinner-border text-primary" role="status">
-        <span className="sr-only">Loading...</span>
+      <div class="d-flex justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only"></span>
+        </div>
       </div>
     );
   } else {
     return (
       <Page>
-        { warning === true  && (
-            <WarningMessage 
-              setWarning = {setWarning}
-              serviceStatus = {serviceStatus}
-            />
-          )
-        }
+        {warning === true && (
+          <WarningMessage
+            setWarning={setWarning}
+            serviceStatus={serviceStatus}
+          />
+        )}
         <div className="inner">
           <section className="title">
             <h1>Welcome!</h1>
@@ -159,7 +162,7 @@ const Index = ({ authAxios, host }) => {
                     <Card>
                       <h4 className="title">Total Revenues</h4>
                       <div className="inform">
-                         {totalsData.revenue && totalsData.revenue.toFixed(2)}
+                        {totalsData.revenue && totalsData.revenue.toFixed(2)}
                       </div>
                       <a href="#" className="faq">
                         <svg
@@ -192,7 +195,10 @@ const Index = ({ authAxios, host }) => {
                     <Card>
                       <h4 className="title">Suspicious Transactions</h4>
                       <div className="inform">
-                        {totalsData.fraudalent ? totalsData.fraudalent.toFixed(2) : 0 }%
+                        {totalsData.fraudalent
+                          ? totalsData.fraudalent.toFixed(2)
+                          : 0}
+                        %
                       </div>
                     </Card>
                   </article>
@@ -222,30 +228,30 @@ const Index = ({ authAxios, host }) => {
             <header>
               <h2 className="title">Top Botted</h2>
             </header>
-            <article className="top-table"> 
+            <article className="top-table">
               <div className="outer-table standart transaction">
-                  <TableDashboard
-                    columns={[
-                      { title: "Phrase", key: "phrase" },
-                      { title: "Bot, %", key: "bot_status" },
-                      { title: "Fraudalent, %", key: "fraudalent" },
-                      { title: "Returns, %", key: "returns" },
-                      { title: "Discount Abuse, %", key: "discount_abuse" },
-                      { title: "Inventory Sold", key: "sold" },
-                    ]}
-                    data={tableData}
-                  />
+                <TableDashboard
+                  columns={[
+                    { title: "Phrase", key: "phrase" },
+                    { title: "Bot, %", key: "bot_status" },
+                    { title: "Fraudalent, %", key: "fraudalent" },
+                    { title: "Returns, %", key: "returns" },
+                    { title: "Discount Abuse, %", key: "discount_abuse" },
+                    { title: "Inventory Sold", key: "sold" },
+                  ]}
+                  data={tableData}
+                />
+              </div>
+              <nav className="pagination">
+                <div className="b-shown">
+                  <TableTotal total={total} pageSize={pageSize} page={page} />
                 </div>
-                <nav className="pagination">
-                  <div className="b-shown">
-                    <TableTotal total={total} pageSize={pageSize} page={page} />
-                  </div>
-                  <Pagination
-                    page={page}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                  />
-                </nav>
+                <Pagination
+                  page={page}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </nav>
             </article>
           </section>
         </div>
