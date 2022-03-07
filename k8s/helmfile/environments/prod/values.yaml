@@ -1,0 +1,7 @@
+envPrefix: prod
+project: botnot
+servingDomain: botnot.io
+ingressClass: nginx
+ingressSecurity: auth
+login: []
+

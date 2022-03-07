@@ -32,25 +32,42 @@ const Table = ({ columns, data, onRowSelect, selectedIds, onRowClick }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((row, rowIndex) => (
-          <tr key={`row-${rowIndex}`} className={`row-${rowIndex}`}>
-            <td className="checkbox">
-              <Checkbox
-                checked={selectedIds.includes(row.id)}
-                onChange={(checked) => handleSelectRowChange(checked, row.id)}
-              />
-            </td>
-            {columns.map((col, colIndex) => (
-              <td
-                className={`cell-${colIndex}  ${col.key}`}
-                key={`cell-${rowIndex}-${colIndex}`}
-                onClick={(e) => onRowClick(row.id)}
-              >
-                <span className={`label ${row[col.key]}`}>{row[col.key]}</span>
+        {data.length > 0 ? (
+          data.map((row, rowIndex) => (
+            <tr key={`row-${rowIndex}`} className={`row-${rowIndex}`}>
+              <td className="checkbox">
+                <Checkbox
+                  checked={selectedIds.includes(row.id)}
+                  onChange={(checked) => handleSelectRowChange(checked, row.id)}
+                />
               </td>
-            ))}
+              {columns.map((col, colIndex) => (
+                <td
+                  className={`cell-${colIndex}  ${col.key}`}
+                  key={`cell-${rowIndex}-${colIndex}`}
+                  onClick={(e) => onRowClick(row.id)}
+                >
+                  <span className={`label ${row[col.key]}`}>
+                    {row[col.key]}
+                  </span>
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colspan="100%">
+              <div className="d-flex justify-content-center">
+                <div
+                  className="spinner-border text-secondary spinner-3"
+                  role="status"
+                >
+                  <span className="sr-only"></span>
+                </div>
+              </div>
+            </td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );

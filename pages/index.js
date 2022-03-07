@@ -5,10 +5,10 @@ import GoogleCharts from "../components/GoogleCharts";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-const DateRange = dynamic(() => import("../components/DateRange"));
-const TableDashboard = dynamic(() => import("../components/TableDashboard"));
-const TableTotal = dynamic(() => import("../components/TableTotal"));
-const Pagination = dynamic(() => import("../components/Pagination"));
+import DateRange from "../components/DateRange";
+import TableDashboard from "../components/TableDashboard";
+import TableTotal from "../components/TableTotal";
+import Pagination from "../components/Pagination";
 const WarningMessage = dynamic(() => import("../components/WarningMessage"));
 
 const Index = ({ authAxios, host }) => {
@@ -97,7 +97,6 @@ const Index = ({ authAxios, host }) => {
         console.log(error);
       });
   };
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (
@@ -114,6 +113,7 @@ const Index = ({ authAxios, host }) => {
   }, []);
 
   useEffect(() => {
+    setTableData([]);
     if (ready) {
       loadData();
     }
@@ -122,7 +122,7 @@ const Index = ({ authAxios, host }) => {
   if (!isLoaded) {
     return (
       <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border text-secondary spinner-5" role="status">
           <span className="sr-only"></span>
         </div>
       </div>

@@ -1,13 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Page, Card, Select } from "@shopify/polaris";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 
-const Table = dynamic(() => import("../components/Table"));
-const TableTotal = dynamic(() => import("../components/TableTotal"));
-const Pagination = dynamic(() => import("../components/Pagination"));
-const Button = dynamic(() => import("../components/Button"));
-const DateRange = dynamic(() => import("../components/DateRange"));
+import Table from "../components/Table";
+import TableTotal from "../components/TableTotal";
+import Pagination from "../components/Pagination";
+import Button from "../components/Button";
+import DateRange from "../components/DateRange";
 
 const Transactions = ({ authAxios }) => {
   const router = useRouter();
@@ -19,11 +18,14 @@ const Transactions = ({ authAxios }) => {
     for (const row of data) {
       result.push({
         id: row.order_id,
-        customer_name: row.customer_fullname,
-        email: row.customer_email,
+        customer_name:
+          row.customer_fullname != " " ? row.customer_fullname : "xxx xxx",
+        email:
+          row.customer_email != true ? row.customer_email : "xxx@example.com",
         risk_label: row.order_risk,
         order_status: row.order_status,
         bot_status: row.bot_status,
+        discount_abuse: row.discount_abuse,
         see_more: "...",
       });
     }
@@ -88,7 +90,6 @@ const Transactions = ({ authAxios }) => {
       day < 10 ? "0" : ""
     }${day}`;
   };
-
   const loadTransactions = () => {
     authAxios
       .get(
@@ -132,6 +133,7 @@ const Transactions = ({ authAxios }) => {
   }, []);
 
   useEffect(() => {
+    setTableData([]);
     if (ready) {
       loadTransactions();
     }
@@ -140,7 +142,7 @@ const Transactions = ({ authAxios }) => {
   if (!isLoaded) {
     return (
       <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border text-secondary spinner-5" role="status">
           <span className="sr-only"></span>
         </div>
       </div>
@@ -165,10 +167,10 @@ const Transactions = ({ authAxios }) => {
                 <div className="search-management">
                   <div className="right">
                     <div className="lite-button">
-                      <Button label="Fulfill" onClick={handleAllow} />
+                      <Button label="Mark as Fraud" onClick={handleAllow} />
                     </div>
                     <div className="lite-button">
-                      <Button label="Cancel" onClick={handleFraud} />
+                      <Button label="Mark as Safe" onClick={handleFraud} />
                     </div>
                   </div>
                 </div>

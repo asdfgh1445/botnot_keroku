@@ -40,4 +40,4 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "botnot0124"
-          heroku_email: "katterine0124@gmail.com"
+          heroku_email: "angelfirst930124@gmail.com"

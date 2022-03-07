@@ -1,0 +1,71 @@
+controller:
+  kind: DaemonSet
+  config:
+    client-body-buffer-size: "64k"
+    proxy-body-size: "16m"
+    keepalive_timeout: "300"
+    grpc_read_timeout: "300"
+    grpc_send_timeout: "300"
+    client_body_timeout: "300"
+    proxy-send-timeout: "300"
+    proxy-read-timeout: "300"
+    client_header_timeout: "300s"
+    limit-req-status-code: "429"
+    limit-conn-status-code: "429"
+    ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2 TLSv1.3"
+    ssl-ciphers: "HIGH:!aNULL:!MD5"
+    log-format-upstream: '{ "time": "$time_iso8601", "remote_addr": "$proxy_protocol_addr", "x-forward-for": "$proxy_add_x_forwarded_for", "request_id": "$req_id", "remote_user": "$remote_user", "body_bytes_sent": "$body_bytes_sent", "request_time": $request_time, "status":$status, "vhost": "$host", "request_proto": "$server_protocol", "request": "$request", "path": "$uri", "request_query": "$args", "request_length": $request_length, "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer", "http_user_agent": "$http_user_agent", "proxy_upstream_name": "$proxy_upstream_name", "upstream_addr": "$upstream_addr", "upstream_response_time": "$upstream_response_time", "upstream_status": "$upstream_status", "ingress_name": "$ingress_name", "service_name": "$service_name", "service_port": "$service_port" }'
+
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "300"
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    externalTrafficPolicy: Local
+  ingressClass:  {{ .Environment.Values.ingressClass | default "nginx" }}
+
+  metrics:
+    enabled: false
+    serviceMonitor:
+      enabled: false
+      namespace: monitoring
+      scrapeInterval: 10s
+    prometheusRule:
+      enabled: false
+      rules:
+        - alert: TooMany500s
+          expr: sum by (ingress, exported_namespace) (rate(nginx_ingress_controller_requests{status=~"5.+"}[5m])) > 5
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            description: Too many 5XXs
+            summary: More than 5% of the all requests did return 5XX, this require your attention
+        - alert: TooMany400s
+          expr: sum by (ingress, exported_namespace) (rate(nginx_ingress_controller_requests{status=~"4.+"}[5m])) > 5
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            description: Too many 4XXs
+            summary: More than 5% of the all requests did return 4XX, this require your attention
+        - alert: TooMany500sOld
+          expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"5.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
+          for: 5m
+          labels:
+            severity: critical
+            label_send_to: devnull
+          annotations:
+            description: Too many 5XXs
+            summary: More than 5% of the all requests did return 5XX, this require your attention
+        - alert: TooMany400sOld
+          expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"4.+"} ) / sum(nginx_ingress_controller_requests) ) > 20
+          for: 5m
+          labels:
+            severity: critical
+            label_send_to: devnull
+          annotations:
+            description: Too many 4XXs
+            summary: More than 5% of the all requests did return 4XX, this require your attention

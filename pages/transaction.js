@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Page, Card, Select } from "@shopify/polaris";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 
-const Button = dynamic(() => import("../components/Button"));
-const RiskScale = dynamic(() => import("../components/RiskScale"));
+import Button from "../components/Button";
+import RiskScale from "../components/RiskScale";
 
 const TransactionDetails = ({ authAxios }) => {
   const router = useRouter();
@@ -70,7 +69,7 @@ const TransactionDetails = ({ authAxios }) => {
   if (!isLoaded) {
     return (
       <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border text-secondary spinner-5" role="status">
           <span className="sr-only"></span>
         </div>
       </div>
@@ -83,10 +82,10 @@ const TransactionDetails = ({ authAxios }) => {
             <h1>Transaction {data.order_id}</h1>
             <div className="managment">
               <div className="lite-button">
-                <Button label="Fulfill" onClick={handleAllow} />
+                <Button label="Mark as Fraud" onClick={handleAllow} />
               </div>
               <div className="lite-button">
-                <Button label="Cancel" onClick={handleBlock} />
+                <Button label="Mark as Safe" onClick={handleBlock} />
               </div>
             </div>
           </section>
@@ -129,7 +128,7 @@ const TransactionDetails = ({ authAxios }) => {
                   of being a bot.
                 </div>
                 <RiskScale value={0.75 /* TODO: use actual value */} />
-
+                {/* 
                 <article className="risk-description">
                   <div className="low">
                     <div className="title">Trust Indicators</div>
@@ -152,7 +151,7 @@ const TransactionDetails = ({ authAxios }) => {
                       <li>Order Shipped to Warehouse </li>
                     </ul>
                   </div>
-                </article>
+                </article> */}
               </section>
             </Card>
           </div>
