@@ -17,7 +17,7 @@ jobs:
           echo 'SHOPIFY_API_SECRET=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' >> .env
           echo 'SHOP=hotbotstore.myshopify.com' >> .env
           echo 'SCOPES=read_products,read_customers,read_orders,read_order_edits,read_draft_orders,read_fulfillments,read_shipping,read_inventory' >> .env
-          echo 'HOST=https://cfb5-104-223-98-2.ngrok.io' >> .env
+          echo 'HOST=https://botnot0124.herokuapp.com' >> .env
           echo 'BOTNOT_API_URL=https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/' >> .env
           echo 'POSTHOG_KEY=phc_7cmZZM8pe90nPjl2u2vPgXa6AqBjPyDhuZOZ8xcS0HX' >> .env
           echo 'POSTHOG_URL=https://posthog.botnot.io' >> .env
