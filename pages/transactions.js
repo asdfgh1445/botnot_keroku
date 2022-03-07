@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 const Table = dynamic(() => import("../components/Table"));
 const TableTotal = dynamic(() => import("../components/TableTotal"));
 const Pagination = dynamic(() => import("../components/Pagination"));
-const Button = dynamic(()=>import("../components/Button"));
-const DateRange = dynamic(()=>import("../components/DateRange"));
+const Button = dynamic(() => import("../components/Button"));
+const DateRange = dynamic(() => import("../components/DateRange"));
 
 const Transactions = ({ authAxios }) => {
   const router = useRouter();
@@ -88,7 +88,7 @@ const Transactions = ({ authAxios }) => {
       day < 10 ? "0" : ""
     }${day}`;
   };
- 
+
   const loadTransactions = () => {
     authAxios
       .get(
@@ -138,7 +138,13 @@ const Transactions = ({ authAxios }) => {
   }, [ready, dateRange, page, pageSize]);
 
   if (!isLoaded) {
-    return <b>{message}</b>;
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only"></span>
+        </div>
+      </div>
+    );
   } else {
     return (
       <Page>

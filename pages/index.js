@@ -3,7 +3,6 @@ import { Page, Card } from "@shopify/polaris";
 import PieChart from "../components/PieChart";
 import GoogleCharts from "../components/GoogleCharts";
 import Link from "next/link";
-import posthog from "posthog-js";
 import dynamic from "next/dynamic";
 
 const DateRange = dynamic(() => import("../components/DateRange"));
@@ -25,7 +24,7 @@ const Index = ({ authAxios, host }) => {
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
   const [serviceStatus, setServiceStatus] = useState([]);
 

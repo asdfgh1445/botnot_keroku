@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 const Table = dynamic(() => import("../components/Table"));
 const TableTotal = dynamic(() => import("../components/TableTotal"));
 const Pagination = dynamic(() => import("../components/Pagination"));
-const Button = dynamic(()=>import("../components/Button"));
-const DateRange = dynamic(()=>import("../components/DateRange"));
+const Button = dynamic(() => import("../components/Button"));
+const DateRange = dynamic(() => import("../components/DateRange"));
 
 const Denylist = ({ authAxios }) => {
   const router = useRouter();
@@ -194,7 +194,13 @@ const Denylist = ({ authAxios }) => {
   }, []);
 
   if (!isLoaded) {
-    return <b>Loading...</b>;
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only"></span>
+        </div>
+      </div>
+    );
   } else {
     return (
       <Page>
