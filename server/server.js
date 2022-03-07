@@ -21,7 +21,7 @@ Shopify.Context.initialize({
   API_SECRET_KEY: "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",
   SCOPES:
     "read_products,read_customers,read_orders,read_order_edits,read_draft_orders,read_fulfillments,read_shipping,read_inventory",
-  HOST_NAME: "botnotv2.herokuapp.com/",
+  HOST_NAME: "botnotv2.herokuapp.com",
   API_VERSION: ApiVersion.October20,
   IS_EMBEDDED_APP: true,
   SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
