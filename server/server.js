@@ -89,111 +89,126 @@ app.prepare().then(async () => {
   });
   router.get("/api/dashboard", async (ctx) => {
     const authHeader = ctx.get("Authorization");
-    const response = await fetch(`${process.env.BOTNOT_API_URL}dashboard/`, {
-      method: "POST",
-      headers: {
-        Authorization: JwtToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        filter: {
-          date_from: ctx.query.date_from,
-          date_to: ctx.query.date_to,
+    const response = await fetch(
+      `https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/dashboard/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: JwtToken,
+          "Content-Type": "application/json",
         },
-        pagination: {
-          from: (Number(ctx.query.page) - 1) * Number(ctx.query.page_size),
-          size: Number(ctx.query.page_size),
-        },
-      }),
-    });
+        body: JSON.stringify({
+          filter: {
+            date_from: ctx.query.date_from,
+            date_to: ctx.query.date_to,
+          },
+          pagination: {
+            from: (Number(ctx.query.page) - 1) * Number(ctx.query.page_size),
+            size: Number(ctx.query.page_size),
+          },
+        }),
+      }
+    );
     ctx.res.statusCode = 200;
     ctx.body = await response.text();
   });
   router.post("/api/transaction/:ids/approve", async (ctx) => {
     const authHeader = ctx.get("Authorization");
     const ids = ctx.params.ids.split(",").map(Number);
-    const response = await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
-      method: "POST",
-      headers: {
-        Authorization: JwtToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "order_mark_as_safe",
-        order_ids: ids,
-      }),
-    });
+    const response = await fetch(
+      `https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: JwtToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "order_mark_as_safe",
+          order_ids: ids,
+        }),
+      }
+    );
     ctx.res.statusCode = 200;
     ctx.body = JSON.stringify({ success: true });
   });
   router.post("/api/transaction/:ids/mark_as_fraud", async (ctx) => {
     const authHeader = ctx.get("Authorization");
     const ids = ctx.params.ids.split(",").map(Number);
-    await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
-      method: "POST",
-      headers: {
-        Authorization: JwtToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "order_mark_as_fraud",
-        order_ids: ids,
-      }),
-    });
+    await fetch(
+      `https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: JwtToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "order_mark_as_fraud",
+          order_ids: ids,
+        }),
+      }
+    );
     ctx.res.statusCode = 200;
     ctx.body = JSON.stringify({ success: true });
   });
   router.get("/api/transactions", async (ctx) => {
     const authHeader = ctx.get("Authorization");
-    const response = await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
-      method: "POST",
-      headers: {
-        Authorization: JwtToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "transaction_list",
-        filter: {
-          date_from: ctx.query.date_from,
-          date_to: ctx.query.date_to,
+    const response = await fetch(
+      `https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: JwtToken,
+          "Content-Type": "application/json",
         },
-        order_by: ["order_id"],
-        pagination: {
-          from: (Number(ctx.query.page) - 1) * Number(ctx.query.page_size),
-          size: Number(ctx.query.page_size),
-        },
-      }),
-    });
+        body: JSON.stringify({
+          type: "transaction_list",
+          filter: {
+            date_from: ctx.query.date_from,
+            date_to: ctx.query.date_to,
+          },
+          order_by: ["order_id"],
+          pagination: {
+            from: (Number(ctx.query.page) - 1) * Number(ctx.query.page_size),
+            size: Number(ctx.query.page_size),
+          },
+        }),
+      }
+    );
     ctx.res.statusCode = 200;
     ctx.body = await response.text();
   });
   router.get("/api/transaction/:id", async (ctx) => {
     const authHeader = ctx.get("Authorization");
-    const response = await fetch(`${process.env.BOTNOT_API_URL}transaction/`, {
-      method: "POST",
-      headers: {
-        Authorization: JwtToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "transaction_list",
-        filter: {
-          order_id: ctx.params.id,
+    const response = await fetch(
+      `https://3jak1c5zra.execute-api.us-east-1.amazonaws.com/Prod/transaction/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: JwtToken,
+          "Content-Type": "application/json",
         },
-        order_by: ["order_id"],
-        pagination: {
-          from: 0,
-          size: 1,
-        },
-        return_fields: [
-          "orders.order_number",
-          "orders.shipping_address",
-          "orders.total_price_usd",
-          "orders.browser_ip",
-          "orders.items",
-        ],
-      }),
-    });
+        body: JSON.stringify({
+          type: "transaction_list",
+          filter: {
+            order_id: ctx.params.id,
+          },
+          order_by: ["order_id"],
+          pagination: {
+            from: 0,
+            size: 1,
+          },
+          return_fields: [
+            "orders.order_number",
+            "orders.shipping_address",
+            "orders.total_price_usd",
+            "orders.browser_ip",
+            "orders.items",
+          ],
+        }),
+      }
+    );
     ctx.res.statusCode = 200;
     ctx.body = await response.text();
   });
