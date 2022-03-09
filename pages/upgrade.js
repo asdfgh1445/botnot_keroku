@@ -46,9 +46,7 @@ const Upgrade = () => {
                 <div className="upgrade-bottom">
                   <div className="price-title">
                     <span className="dollar">$</span>
-                    <span style={{ fontSize: "30px" }}>
-                      <b>0</b>
-                    </span>
+                    <span className="price">0</span>
                     <sub>/month</sub>
                   </div>
                   <button className="price-button">Primary</button>
@@ -85,9 +83,7 @@ const Upgrade = () => {
                 <div className="upgrade-bottom">
                   <div className="price-title">
                     <span className="dollar">$</span>
-                    <span style={{ fontSize: "30px" }}>
-                      <b>217</b>
-                    </span>
+                    <span className="price">217</span>
                     <sub>/month</sub>
                   </div>
                   <button className="price-button">Choose</button>
@@ -124,9 +120,7 @@ const Upgrade = () => {
                 <div className="upgrade-bottom">
                   <div className="price-title">
                     <span className="dollar">$</span>
-                    <span style={{ fontSize: "30px" }}>
-                      <b>566</b>
-                    </span>
+                    <span className="price">566</span>
                     <sub>/month</sub>
                   </div>
                   <button className="price-button">Choose</button>
