@@ -8,17 +8,15 @@ import { Provider, useAppBridge } from "@shopify/app-bridge-react";
 import { authenticatedFetch } from "@shopify/app-bridge-utils";
 import { Redirect } from "@shopify/app-bridge/actions";
 import "@shopify/polaris/dist/styles.css";
+import "../assets/Styles.scss";
 import translations from "@shopify/polaris/locales/en.json";
 import axios from "axios";
 import { getSessionToken } from "@shopify/app-bridge-utils";
 import { usePostHog } from "next-use-posthog";
 import { LiveChatLoaderProvider } from "react-live-chat-loader";
 
-// import Header from "../components/Header";
-const Header = dynamic(() => import("../components/Header"));
-const Menu = dynamic(() => import("../components/Menu"));
-import "../assets/Styles.scss";
-import { useEffect } from "react";
+import Header from "../components/Header";
+import Menu from "../components/Menu";
 
 function userLoggedInFetch(app) {
   const fetchFunction = authenticatedFetch(app);

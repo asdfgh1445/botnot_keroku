@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Page, Card, Select } from "@shopify/polaris";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
-import Table from "../components/Table";
-import TableTotal from "../components/TableTotal";
-import Pagination from "../components/Pagination";
-import Button from "../components/Button";
-import DateRange from "../components/DateRange";
+const Table = dynamic(() => import("../components/Table"));
+const TableTotal = dynamic(() => import("../components/TableTotal"));
+const Pagination = dynamic(() => import("../components/Pagination"));
+const Button = dynamic(() => import("../components/Button"));
+const DateRange = dynamic(() => import("../components/DateRange"));
 
 const Transactions = ({ authAxios }) => {
   const router = useRouter();

@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Page, Card, Select } from "@shopify/polaris";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
-import Button from "../components/Button";
-import RiskScale from "../components/RiskScale";
+const Button = dynamic(() => import("../components/Button"));
+const RiskScale = dynamic(() => import("../components/RiskScale"));
 
 const TransactionDetails = ({ authAxios }) => {
   const router = useRouter();
@@ -128,7 +129,7 @@ const TransactionDetails = ({ authAxios }) => {
                   of being a bot.
                 </div>
                 <RiskScale value={0.75 /* TODO: use actual value */} />
-                {/* 
+
                 <article className="risk-description">
                   <div className="low">
                     <div className="title">Trust Indicators</div>
@@ -151,7 +152,7 @@ const TransactionDetails = ({ authAxios }) => {
                       <li>Order Shipped to Warehouse </li>
                     </ul>
                   </div>
-                </article> */}
+                </article>
               </section>
             </Card>
           </div>
