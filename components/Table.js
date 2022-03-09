@@ -56,7 +56,7 @@ const Table = ({ columns, data, onRowSelect, selectedIds, onRowClick }) => {
           ))
         ) : (
           <tr>
-            <td colspan="100%">
+            <td colSpan="100%">
               <div className="d-flex justify-content-center">
                 <div
                   className="spinner-border text-secondary spinner-3"
