@@ -1651,9 +1651,9 @@ table.standart.campaing {
           text-align: center;
         }
 
-        th:last-child {
-          padding-left: 10px;
-        }
+        // th:last-child {
+        //   padding-left: 10px;
+        // }
       }
     }
 
@@ -2416,7 +2416,132 @@ section.blocked-accounts {
   height: 5rem;
 }
 .spinner-3 {
-  margin: 10px;
+  margin: 20px;
   width: 3rem;
   height: 3rem;
+}
+.billing_toast {
+  position: fixed !important;
+  right: 30%;
+  bottom: 20px;
+}
+.toast {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.5rem !important;
+    color: white;
+    background-color: #5162d3c7 !important;
+    border-radius: 1.25rem !important;
+}
+
+.toast-body {
+  padding: 1.5rem 3rem !important;
+}
+.upgrade_text {
+  font-size: 16px;
+  strong {
+    font-size: 20px;
+  }
+}
+.upgrade-content {
+  margin-top: 50px;
+  text-align: center;
+  font-family: Work Sans;
+  color: #181059;
+  p {
+    margin: 20px 0;
+    padding: 0 20%;
+    font-size: 16px;
+  }
+  .title {
+    font-size: 30px;
+    text-shadow: 0px 3px #cdcbcb;
+    font-weight: bolder;
+  }
+  .description {
+    text-shadow: 0px 1.5px #d1cfcf;
+  }
+  .swith-button {
+    display: flex; 
+    justify-content: center;
+    span{      
+      font-size: 16px;
+      font-weight: bolder;
+      text-shadow: 0px 1.5px #d1cfcf;
+    }
+  }
+}
+.form-switch .form-check-input {
+  width: 2em;
+  margin-left: -2.5em;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23EDBB01'/></svg>") !important;
+  background-color: #181059;
+  border: 1px solid black;
+  background-position: left center;
+  border-radius: 2em;
+}
+.cart {
+  margin-top: 150px;
+  .purchase-card{
+    color: #181059;
+    width: 186px;
+    height: 418px;
+    border-radius: 24px;
+    box-shadow: 0px 1px 2px 1px #4F4F4F;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1;
+    .title{
+      font-size: 24px;
+      color: #181059;
+      font-family: "Work Sans";
+      margin: 10px 0 30px 0;
+      font-weight: bolder;
+    }
+    .upgrade-list{
+      padding: 0px !important;
+      li{
+        margin: 10px 0;
+        font-size: 16px;
+        display: flex;
+      }      
+      .check-icon {
+        font-size: 16px;
+        min-width: 18px;
+        margin-right: 5px;
+      }
+    }
+    .description {
+      font-size: 16px;
+      color: #181059;
+      font-family: "Inter";
+    }
+    .price-title {        
+      margin: 20px 0;
+      font-size: 16px;
+      .dollar{
+        font-size: 17px;
+      }
+      .price {
+        font-size: 25px;
+      }
+    }
+    .price-button{
+      margin: 20px 0;
+      color: #7879F1; 
+      font-size: 16px;
+      border: 0px solid white;
+      font-family: Inter;
+      background-color: white;
+      font-weight: bolder;
+    }
+    .upgrade-bottom{
+      text-align: center;
+    }
+  }
+}
+.container{
+  padding: 0 !important;
 }
