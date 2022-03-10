@@ -2150,6 +2150,7 @@ section.risk-information {
         height: 100%;
         border-radius: 8px;
         background: var(--primary-color);
+        overflow: inherit;
 
         &::after {
           content: "";
@@ -2163,6 +2164,7 @@ section.risk-information {
           margin-top: -10px;
           margin-right: -10px;
           background: white;
+          cursor: pointer;
           box-shadow: 0 0 0px 1px #C1C9D2,
             0px 2px 5px rgba(60, 66, 87, 0.08),
             0px 1px 1px rgba(0, 0, 0, 0.12);
