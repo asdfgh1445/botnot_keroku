@@ -241,12 +241,12 @@ const Index = ({ authAxios, host }) => {
               <div className="outer-table standart transaction">
                 <TableDashboard
                   columns={[
-                    { title: "Phrase", key: "phrase" },
-                    { title: "Bot, %", key: "bot_status" },
-                    { title: "Fraudalent, %", key: "fraudalent" },
-                    { title: "Returns, %", key: "returns" },
-                    { title: "Discount Abuse, %", key: "discount_abuse" },
                     { title: "Inventory Sold", key: "sold" },
+                    { title: "Phrase", key: "phrase" },
+                    { title: "Bot %", key: "bot_status" },
+                    { title: "Fraudalent %", key: "fraudalent" },
+                    { title: "Returns %", key: "returns" },
+                    { title: "Discount Abuse %", key: "discount_abuse" },
                   ]}
                   data={tableData}
                 />
