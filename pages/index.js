@@ -11,6 +11,7 @@ const TableDashboard = dynamic(() => import("../components/TableDashboard"));
 const TableTotal = dynamic(() => import("../components/TableTotal"));
 const Pagination = dynamic(() => import("../components/Pagination"));
 const WarningMessage = dynamic(() => import("../components/WarningMessage"));
+const BillingToast = dynamic(() => import("../components/BillingToast"));
 
 const Index = ({ authAxios, host }) => {
   const google = GoogleCharts();
