@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 
-const BillingToast = (props) => {
-  const [showA, setShowA] = useState(true);
-
-  const toggleShowA = () => setShowA(!showA);
-
+const BillingToast = ({ warning }) => {
+  const [toast, setToast] = useState(warning);
   return (
     <ToastContainer className="billing_toast">
-      <Toast show={showA} onClose={toggleShowA}>
+      <Toast onClose={() => setToast(false)} show={toast} delay={3000} autohide>
         <Toast.Body>Thanks, we will remind you next time</Toast.Body>
       </Toast>
     </ToastContainer>

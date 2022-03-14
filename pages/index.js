@@ -275,6 +275,7 @@ const Index = ({ authAxios, host }) => {
             )}
           </section>
         </div>
+        <BillingToast warning={!warning} />
       </Page>
     );
   }
