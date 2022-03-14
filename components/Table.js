@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Checkbox } from "@shopify/polaris";
+import { BsBookmarkXFill } from "react-icons/bs";
 
 const Table = ({ columns, data, onRowSelect, selectedIds, onRowClick }) => {
   const handleSelectAllChange = useCallback((checked) => {
@@ -50,6 +51,9 @@ const Table = ({ columns, data, onRowSelect, selectedIds, onRowClick }) => {
                   <span className={`label ${row[col.key]}`}>
                     {row[col.key]}
                   </span>
+                  {colIndex == 0 && row.orders_is_marked_as_fraud && (
+                    <BsBookmarkXFill color="red" />
+                  )}
                 </td>
               ))}
             </tr>

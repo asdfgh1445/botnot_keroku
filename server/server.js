@@ -173,6 +173,7 @@ app.prepare().then(async () => {
             from: (Number(ctx.query.page) - 1) * Number(ctx.query.page_size),
             size: Number(ctx.query.page_size),
           },
+          return_fields: ["orders.is_marked_as_fraud"],
         }),
       }
     );
