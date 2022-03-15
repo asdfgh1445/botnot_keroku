@@ -8,6 +8,7 @@ const TableTotal = dynamic(() => import("../components/TableTotal"));
 const Pagination = dynamic(() => import("../components/Pagination"));
 const Button = dynamic(() => import("../components/Button"));
 const DateRange = dynamic(() => import("../components/DateRange"));
+const ExportTool = dynamic(() => import("../components/ExportTool"));
 
 const Transactions = ({ authAxios }) => {
   const router = useRouter();
@@ -27,6 +28,7 @@ const Transactions = ({ authAxios }) => {
         order_status: row.order_status,
         bot_status: row.bot_status,
         discount_abuse: row.discount_abuse,
+        orders_is_marked_as_fraud: row.orders_is_marked_as_fraud,
         see_more: "...",
       });
     }
@@ -168,10 +170,10 @@ const Transactions = ({ authAxios }) => {
                 <div className="search-management">
                   <div className="right">
                     <div className="lite-button">
-                      <Button label="Mark as Fraud" onClick={handleAllow} />
+                      <Button label="Mark as Safe" onClick={handleAllow} />
                     </div>
                     <div className="lite-button">
-                      <Button label="Mark as Safe" onClick={handleFraud} />
+                      <Button label="Mark as Fraud" onClick={handleFraud} />
                     </div>
                   </div>
                 </div>
@@ -197,6 +199,7 @@ const Transactions = ({ authAxios }) => {
                   <div className="b-shown">
                     <TableTotal total={total} pageSize={pageSize} page={page} />
                   </div>
+                  <ExportTool authAxios={authAxios} />
                   <Pagination
                     page={page}
                     totalPages={totalPages}

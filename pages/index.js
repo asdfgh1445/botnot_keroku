@@ -155,7 +155,7 @@ const Index = ({ authAxios, host }) => {
                       <div className="inform">
                         {totalsData.revenue && totalsData.revenue.toFixed(2)}
                       </div>
-                      <OverlayTrigger
+                      {/* <OverlayTrigger
                         placement="bottom"
                         overlay={
                           <Tooltip
@@ -184,7 +184,7 @@ const Index = ({ authAxios, host }) => {
                             </svg>
                           </a>
                         )}
-                      </OverlayTrigger>
+                      </OverlayTrigger> */}
                     </Card>
                   </article>
                   <article className="order-item">
@@ -242,12 +242,12 @@ const Index = ({ authAxios, host }) => {
               <div className="outer-table standart transaction">
                 <TableDashboard
                   columns={[
-                    { title: "Inventory Sold", key: "sold" },
                     { title: "Phrase", key: "phrase" },
-                    { title: "Bot %", key: "bot_status" },
-                    { title: "Fraudalent %", key: "fraudalent" },
-                    { title: "Returns %", key: "returns" },
-                    { title: "Discount Abuse %", key: "discount_abuse" },
+                    { title: "Bot, %", key: "bot_status" },
+                    { title: "Fraudalent, %", key: "fraudalent" },
+                    { title: "Returns, %", key: "returns" },
+                    { title: "Discount Abuse, %", key: "discount_abuse" },
+                    { title: "Inventory Sold", key: "sold" },
                   ]}
                   data={tableData}
                 />
@@ -268,15 +268,15 @@ const Index = ({ authAxios, host }) => {
             <header>
               <h2 className="title">Billing Status</h2>
             </header>
-            {warning && (
+            {/* {warning && (
               <WarningMessage
                 setWarning={setWarning}
                 serviceStatus={serviceStatus}
               />
-            )}
+            )} */}
           </section>
+          <BillingToast warning={!warning} />
         </div>
-        <BillingToast warning={!warning} />
       </Page>
     );
   }

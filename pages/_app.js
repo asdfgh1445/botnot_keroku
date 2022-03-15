@@ -68,7 +68,6 @@ function MyProvider(props) {
   );
 }
 function MyApp({ Component, pageProps, host }) {
-  const router = useRouter();
   usePostHog(POSTHOG_KEY, {
     api_host: POSTHOG_URL,
     loaded: (posthog) => {
